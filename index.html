@@ -119,41 +119,40 @@
 <script>
 const classificacoes = {
   "Administração": [
-    { limite: 0.2, nota: 1 },
-    { limite: 0.4, nota: 2 },
-    { limite: 0.6, nota: 3 },
-    { limite: 0.8, nota: 4 },
-    { limite: 1, nota: 5 }
+    { limite: 0.8, nota: 5 },
+    { limite: 0.6, nota: 4 },
+    { limite: 0.4, nota: 3 },
+    { limite: 0.2, nota: 2 },
+    { limite: 0, nota: 1 }
   ],
   "Direito": [
-    { limite: 0.25, nota: 1 },
-    { limite: 0.45, nota: 2 },
-    { limite: 0.65, nota: 3 },
-    { limite: 0.85, nota: 4 },
-    { limite: 1, nota: 5 }
+    { limite: 0.85, nota: 5 },
+    { limite: 0.65, nota: 4 },
+    { limite: 0.45, nota: 3 },
+    { limite: 0.25, nota: 2 },
+    { limite: 0, nota: 1 }
   ],
   "Medicina": [
-  { limite: 0.43, nota: 0 },  // Sem nota
-  { limite: 0.44, nota: 1 },
-  { limite: 0.56, nota: 2 },
-  { limite: 0.70, nota: 3 },
-  { limite: 0.84, nota: 4 },
-  { limite: 1.00, nota: 5 }
+    { limite: 1.00, nota: 5 },
+    { limite: 0.84, nota: 4 },
+    { limite: 0.70, nota: 3 },
+    { limite: 0.56, nota: 2 },
+    { limite: 0.44, nota: 1 },
+    { limite: 0, nota: 0 }
   ],
   "Psicologia": [
-    { limite: 0.2, nota: 1 },
-    { limite: 0.45, nota: 2 },
-    { limite: 0.65, nota: 3 },
-    { limite: 0.85, nota: 4 },
-    { limite: 1, nota: 5 }
+    { limite: 0.85, nota: 5 },
+    { limite: 0.65, nota: 4 },
+    { limite: 0.45, nota: 3 },
+    { limite: 0.2, nota: 2 },
+    { limite: 0, nota: 1 }
   ],
-  // Exemplo genérico para os outros cursos (ajuste depois)
   "default": [
-    { limite: 0.2, nota: 1 },
-    { limite: 0.4, nota: 2 },
-    { limite: 0.6, nota: 3 },
-    { limite: 0.8, nota: 4 },
-    { limite: 1, nota: 5 }
+    { limite: 0.8, nota: 5 },
+    { limite: 0.6, nota: 4 },
+    { limite: 0.4, nota: 3 },
+    { limite: 0.2, nota: 2 },
+    { limite: 0, nota: 1 }
   ]
 };
 
@@ -181,11 +180,12 @@ function calcular() {
   const somaMesDou = (Number(percMes) + Number(percDou)).toFixed(2);
 
   const classificacaoCurso = classificacoes[curso] || classificacoes["default"];
-  let nota = "Sem classificação";
   const percDecimal = somaMesDou / 100;
 
+  // Lógica corrigida: pega a maior nota cujo limite seja menor ou igual ao percentual
+  let nota = "Sem classificação";
   for (let i = 0; i < classificacaoCurso.length; i++) {
-    if (percDecimal <= classificacaoCurso[i].limite) {
+    if (percDecimal >= classificacaoCurso[i].limite) {
       nota = classificacaoCurso[i].nota;
       break;
     }
