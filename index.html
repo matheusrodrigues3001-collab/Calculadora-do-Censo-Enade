@@ -15,7 +15,7 @@
   }
   h2 {
     text-align: center;
-    color: #CE0058; /* cor atualizada */
+    color: #CE0058;
   }
   label {
     font-weight: bold;
@@ -30,7 +30,7 @@
   button {
     width: 100%;
     padding: 10px;
-    background: #CE0058; /* cor atualizada */
+    background: #CE0058;
     border: none;
     color: white;
     border-radius: 6px;
@@ -38,12 +38,12 @@
     cursor: pointer;
   }
   button:hover {
-    background: #9a0043; /* tom mais escuro para hover */
+    background: #9a0043;
   }
   #resultado {
     margin-top: 20px;
     padding: 15px;
-    background: #e9f5ff;
+    background: #e6f1ff;
     border-radius: 8px;
   }
   .logo {
@@ -61,6 +61,7 @@
 
 <label for="curso">Selecione o curso:</label>
 <select id="curso">
+  <option value="">Selecione...</option>
   <option>Administração</option>
   <option>Administração Pública</option>
   <option>Agronomia</option>
@@ -92,56 +93,12 @@
   <option>Engenharia Química</option>
   <option>Estética e Cosmética</option>
   <option>Farmácia</option>
-  <option>Filosofia (Bacharelado)</option>
-  <option>Filosofia (Licenciatura)</option>
-  <option>Física (Licenciatura)</option>
   <option>Fisioterapia</option>
-  <option>Fonoaudiologia</option>
-  <option>Geografia (Bacharelado)</option>
-  <option>Geografia (Licenciatura)</option>
-  <option>Gestão Ambiental</option>
-  <option>Gestão Comercial</option>
-  <option>História (Bacharelado)</option>
-  <option>História (Licenciatura)</option>
-  <option>Letras - Inglês (Licenciatura)</option>
-  <option>Letras - Português (Licenciatura)</option>
-  <option>Letras - Português e Espanhol (Licenciatura)</option>
-  <option>Letras - Português e Inglês (Licenciatura)</option>
-  <option>Matemática (Licenciatura)</option>
   <option>Medicina</option>
-  <option>Medicina Veterinária</option>
-  <option>Música (Licenciatura)</option>
-  <option>Nutrição</option>
   <option>Odontologia</option>
   <option>Pedagogia (Licenciatura)</option>
   <option>Psicologia</option>
-  <option>Química (Bacharelado)</option>
-  <option>Química (Licenciatura)</option>
-  <option>Relações Internacionais</option>
-  <option>Secretariado Executivo</option>
-  <option>Serviço Social</option>
   <option>Sistemas de Informação</option>
-  <option>Tecnologia em Agronegócios</option>
-  <option>Tecnologia em Análise e Desenvolvimento de Sistemas</option>
-  <option>Tecnologia em Comércio Exterior</option>
-  <option>Tecnologia em Design de Interiores</option>
-  <option>Tecnologia em Design de Moda</option>
-  <option>Tecnologia em Design Gráfico</option>
-  <option>Tecnologia em Gastronomia</option>
-  <option>Tecnologia em Gestão da Qualidade</option>
-  <option>Tecnologia em Gestão da Tecnologia da Informação</option>
-  <option>Tecnologia em Gestão de Recursos Humanos</option>
-  <option>Tecnologia em Gestão Financeira</option>
-  <option>Tecnologia em Gestão Pública</option>
-  <option>Tecnologia em Logística</option>
-  <option>Tecnologia em Marketing</option>
-  <option>Tecnologia em Processos Gerenciais</option>
-  <option>Tecnologia em Radiologia</option>
-  <option>Tecnologia em Redes de Computadores</option>
-  <option>Teologia</option>
-  <option>Turismo</option>
-  <option>Zootecnia</option>
-  <!-- ... restante das opções ... -->
 </select>
 
 <hr>
@@ -162,6 +119,45 @@
 <div id="resultado"></div>
 
 <script>
+const classificacoes = {
+  "Administração": [
+    { limite: 0.2, nota: 1 },
+    { limite: 0.4, nota: 2 },
+    { limite: 0.6, nota: 3 },
+    { limite: 0.8, nota: 4 },
+    { limite: 1, nota: 5 }
+  ],
+  "Direito": [
+    { limite: 0.25, nota: 1 },
+    { limite: 0.45, nota: 2 },
+    { limite: 0.65, nota: 3 },
+    { limite: 0.85, nota: 4 },
+    { limite: 1, nota: 5 }
+  ],
+  "Medicina": [
+    { limite: 0.3, nota: 1 },
+    { limite: 0.5, nota: 2 },
+    { limite: 0.7, nota: 3 },
+    { limite: 0.9, nota: 4 },
+    { limite: 1, nota: 5 }
+  ],
+  "Psicologia": [
+    { limite: 0.2, nota: 1 },
+    { limite: 0.45, nota: 2 },
+    { limite: 0.65, nota: 3 },
+    { limite: 0.85, nota: 4 },
+    { limite: 1, nota: 5 }
+  ],
+  // Exemplo genérico para os outros cursos (ajuste depois)
+  "default": [
+    { limite: 0.2, nota: 1 },
+    { limite: 0.4, nota: 2 },
+    { limite: 0.6, nota: 3 },
+    { limite: 0.8, nota: 4 },
+    { limite: 1, nota: 5 }
+  ]
+};
+
 function calcular() {
   const esp = Number(document.getElementById('especialista').value);
   const mes = Number(document.getElementById('mestre').value);
@@ -185,6 +181,17 @@ function calcular() {
   const percDou = ((dou / total) * 100).toFixed(2);
   const somaMesDou = (Number(percMes) + Number(percDou)).toFixed(2);
 
+  const classificacaoCurso = classificacoes[curso] || classificacoes["default"];
+  let nota = "Sem classificação";
+  const percDecimal = somaMesDou / 100;
+
+  for (let i = 0; i < classificacaoCurso.length; i++) {
+    if (percDecimal <= classificacaoCurso[i].limite) {
+      nota = classificacaoCurso[i].nota;
+      break;
+    }
+  }
+
   document.getElementById('resultado').innerHTML = `
     <h4>Resultados para o curso: ${curso}</h4>
     <p><strong>Total de docentes:</strong> ${total}</p>
@@ -193,6 +200,7 @@ function calcular() {
     <p>Doutores: ${dou} (${percDou}%)</p>
     <hr>
     <p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
+    <p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
   `;
 }
 </script>
