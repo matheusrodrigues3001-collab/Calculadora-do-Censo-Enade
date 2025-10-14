@@ -1,121 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Calculadora de Censo - Desempenho Acadêmico</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f7f9fb;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  h2 {
-    text-align: center;
-    color: #CE0058;
-  }
-  label {
-    font-weight: bold;
-  }
-  select, input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  button {
-    width: 100%;
-    padding: 10px;
-    background: #CE0058;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #9a0043;
-  }
-  #resultado {
-    margin-top: 20px;
-    padding: 15px;
-    background: #e6f1ff;
-    border-radius: 8px;
-  }
-  .logo {
-    display: block;
-    margin: 0 auto 20px auto;
-    max-width: 200px;
-  }
-</style>
-</head>
-<body>
-
-<h2>Calculadora de Censo - Desempenho Acadêmico</h2>
-
-<label for="curso">Selecione o curso:</label>
-<select id="curso">
-  <option value="">Selecione...</option>
-  <option>Administração</option>
-  <option>Administração Pública</option>
-  <option>Agronomia</option>
-  <option>Arquitetura e Urbanismo</option>
-  <option>Artes Visuais (Licenciatura)</option>
-  <option>Biomedicina</option>
-  <option>Ciência da Computação (Bacharelado)</option>
-  <option>Ciência da Computação (Licenciatura)</option>
-  <option>Ciências Biológicas (Bacharelado)</option>
-  <option>Ciências Biológicas (Licenciatura)</option>
-  <option>Ciências Contábeis</option>
-  <option>Ciências Econômicas</option>
-  <option>Ciências Sociais (Bacharelado)</option>
-  <option>Ciências Sociais (Licenciatura)</option>
-  <option>Comunicação Social (Jornalismo)</option>
-  <option>Comunicação Social (Publicidade e Propaganda)</option>
-  <option>Design (Bacharelado)</option>
-  <option>Direito</option>
-  <option>Educação Física (Bacharelado)</option>
-  <option>Educação Física (Licenciatura)</option>
-  <option>Enfermagem</option>
-  <option>Engenharia Ambiental</option>
-  <option>Engenharia Civil</option>
-  <option>Engenharia da Computação</option>
-  <option>Engenharia de Produção</option>
-  <option>Engenharia Elétrica</option>
-  <option>Engenharia Mecânica</option>
-  <option>Engenharia Mecatrônica</option>
-  <option>Engenharia Química</option>
-  <option>Estética e Cosmética</option>
-  <option>Farmácia</option>
-  <option>Fisioterapia</option>
-  <option>Medicina</option>
-  <option>Odontologia</option>
-  <option>Pedagogia (Licenciatura)</option>
-  <option>Psicologia</option>
-  <option>Sistemas de Informação</option>
-</select>
-
-<hr>
-
-<h3>Indicador - Stricto Sensu</h3>
-
-<label>Quantidade de Especialistas:</label>
-<input type="number" id="especialista" placeholder="Digite o número de Especialistas">
-
-<label>Quantidade de Mestres:</label>
-<input type="number" id="mestre" placeholder="Digite o número de Mestres">
-
-<label>Quantidade de Doutores:</label>
-<input type="number" id="doutor" placeholder="Digite o número de Doutores">
-
-<button onclick="calcular()">Calcular</button>
-
-<div id="resultado"></div>
-
 <script>
 const classificacoes = {
   "Administração": [
@@ -185,7 +67,6 @@ function calcular() {
   const classificacaoCurso = classificacoes[curso] || classificacoes["default"];
   const percDecimal = somaMesDou / 100;
 
-  // Lógica corrigida: pega a maior nota cujo limite seja menor ou igual ao percentual
   let nota = "Sem classificação";
   for (let i = 0; i < classificacaoCurso.length; i++) {
     if (percDecimal >= classificacaoCurso[i].limite) {
@@ -193,11 +74,14 @@ function calcular() {
       break;
     }
   }
-  // Define a cor do semáforo conforme a nota
+
+  // 🚦 Define a cor conforme a nota
   let corSemaforo = "gray";
-  if (nota == 5 || nota == 4) corSemaforo = "green";
-  else if (nota == 3) corSemaforo = "yellow";
-  else if (nota == 2 || nota == 1) corSemaforo = "red";
+  if (nota == 5) corSemaforo = "#00c853";     // verde forte
+  else if (nota == 4) corSemaforo = "#aeea00"; // verde-limão
+  else if (nota == 3) corSemaforo = "#ffeb3b"; // amarelo
+  else if (nota == 2) corSemaforo = "#ff9800"; // laranja
+  else if (nota == 1) corSemaforo = "#d50000"; // vermelho
 
   document.getElementById('resultado').innerHTML = `
     <h4>Resultados para o curso: ${curso}</h4>
@@ -208,6 +92,7 @@ function calcular() {
     <hr>
     <p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
     <p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
+    <div class="semaforo" style="background:${corSemaforo};"></div>
   `;
 }
 </script>
