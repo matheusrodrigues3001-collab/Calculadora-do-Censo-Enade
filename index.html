@@ -1,3 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Censo - Desempenho Acadêmico</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fb;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+    color: #CE0058;
+  }
+  label {
+    font-weight: bold;
+  }
+  select, input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #CE0058;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #9a0043;
+  }
+  #resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e6f1ff;
+    border-radius: 8px;
+    text-align: center;
+  }
+  /* Estilo do semáforo */
+  .semaforo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 15px auto;
+    border: 3px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+
+<h2>Calculadora de Censo - Desempenho Acadêmico</h2>
+
+<label for="curso">Selecione o curso:</label>
+<select id="curso">
+  <option value="">Selecione...</option>
+  <option>Administração</option>
+  <option>Administração Pública</option>
+  <option>Agronomia</option>
+  <option>Arquitetura e Urbanismo</option>
+  <option>Artes Visuais (Licenciatura)</option>
+  <option>Biomedicina</option>
+  <option>Ciência da Computação (Bacharelado)</option>
+  <option>Ciência da Computação (Licenciatura)</option>
+  <option>Ciências Biológicas (Bacharelado)</option>
+  <option>Ciências Biológicas (Licenciatura)</option>
+  <option>Ciências Contábeis</option>
+  <option>Ciências Econômicas</option>
+  <option>Ciências Sociais (Bacharelado)</option>
+  <option>Ciências Sociais (Licenciatura)</option>
+  <option>Comunicação Social (Jornalismo)</option>
+  <option>Comunicação Social (Publicidade e Propaganda)</option>
+  <option>Design (Bacharelado)</option>
+  <option>Direito</option>
+  <option>Educação Física (Bacharelado)</option>
+  <option>Educação Física (Licenciatura)</option>
+  <option>Enfermagem</option>
+  <option>Engenharia Ambiental</option>
+  <option>Engenharia Civil</option>
+  <option>Engenharia da Computação</option>
+  <option>Engenharia de Produção</option>
+  <option>Engenharia Elétrica</option>
+  <option>Engenharia Mecânica</option>
+  <option>Engenharia Mecatrônica</option>
+  <option>Engenharia Química</option>
+  <option>Estética e Cosmética</option>
+  <option>Farmácia</option>
+  <option>Fisioterapia</option>
+  <option>Medicina</option>
+  <option>Odontologia</option>
+  <option>Pedagogia (Licenciatura)</option>
+  <option>Psicologia</option>
+  <option>Sistemas de Informação</option>
+</select>
+
+<hr>
+
+<h3>Indicador - Stricto Sensu</h3>
+
+<label>Quantidade de Especialistas:</label>
+<input type="number" id="especialista" placeholder="Digite o número de Especialistas">
+
+<label>Quantidade de Mestres:</label>
+<input type="number" id="mestre" placeholder="Digite o número de Mestres">
+
+<label>Quantidade de Doutores:</label>
+<input type="number" id="doutor" placeholder="Digite o número de Doutores">
+
+<button onclick="calcular()">Calcular</button>
+
+<div id="resultado"></div>
+
 <script>
 const classificacoes = {
   "Administração": [
@@ -75,7 +198,7 @@ function calcular() {
     }
   }
 
-  // 🚦 Define a cor conforme a nota
+  // Define a cor do semáforo conforme a nota
   let corSemaforo = "gray";
   if (nota == 5) corSemaforo = "#00c853";     // verde forte
   else if (nota == 4) corSemaforo = "#aeea00"; // verde-limão
