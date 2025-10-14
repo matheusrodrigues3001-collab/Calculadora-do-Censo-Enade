@@ -193,6 +193,11 @@ function calcular() {
       break;
     }
   }
+  // Define a cor do semáforo conforme a nota
+  let corSemaforo = "gray";
+  if (nota == 5 || nota == 4) corSemaforo = "green";
+  else if (nota == 3) corSemaforo = "yellow";
+  else if (nota == 2 || nota == 1) corSemaforo = "red";
 
   document.getElementById('resultado').innerHTML = `
     <h4>Resultados para o curso: ${curso}</h4>
