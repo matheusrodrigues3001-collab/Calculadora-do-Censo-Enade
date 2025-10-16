@@ -17,6 +17,12 @@
     text-align: center;
     color: #CE0058;
   }
+  .logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 200px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+  }
   label {
     font-weight: bold;
   }
@@ -73,6 +79,7 @@
 </style>
 </head>
 <body>
+    <img src="afya_logo.png" alt="Logo da Afya" class="logo">
  
 <h2>Calculadora de Censo - Desempenho Acadêmico</h2>
  
@@ -116,6 +123,26 @@
 <option>Pedagogia (Licenciatura)</option>
 <option>Psicologia</option>
 <option>Sistemas de Informação</option>
+<option>Tecnologia em Agronegócios</option>
+<option>Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+<option>Tecnologia em Comércio Exterior</option>
+<option>Tecnologia em Design de Interiores</option>
+<option>Tecnologia em Design de Moda</option>
+<option>Tecnologia em Design Gráfico</option>
+<option>Tecnologia em Gastronomia</option>
+<option>Tecnologia em Gestão da Qualidade</option>
+<option>Tecnologia em Gestão da Tecnologia da Informação</option>
+<option>Tecnologia em Gestão de Recursos Humanos</option>
+<option>Tecnologia em Gestão Financeira</option>
+<option>Tecnologia em Gestão Pública</option>
+<option>Tecnologia em Logística</option>
+<option>Tecnologia em Marketing</option>
+<option>Tecnologia em Processos Gerenciais</option>
+<option>Tecnologia em Radiologia</option>
+<option>Tecnologia em Redes de Computadores</option>
+<option>Teologia</option>
+<option>Turismo</option>
+<option>Zootecnia</option>
 </select>
  
 <hr>
@@ -137,6 +164,14 @@
  
 <script>
 const classificacoes = {
+  "legendas": {
+    "5": "Excelente",
+    "4": "Muito Bom",
+    "3": "Bom",
+    "2": "Regular",
+    "1": "Insuficiente",
+    "0": "Crítico"
+  },
   "Administração": [
     { limite: 0.9215686, nota: 5 },
     { limite: 0.8431373, nota: 4 },
@@ -774,20 +809,20 @@ const classificacoes = {
 };
  
 function calcular() {
-  const esp = Number(document.getElementById('especialista').value);
-  const mes = Number(document.getElementById('mestre').value);
-  const dou = Number(document.getElementById('doutor').value);
-  const curso = document.getElementById('curso').value;
+  const esp = Number(document.getElementById("especialista").value);
+  const mes = Number(document.getElementById("mestre").value);
+  const dou = Number(document.getElementById("doutor").value);
+  const curso = document.getElementById("curso").value;
  
   if (!curso) {
-    alert('Selecione um curso!');
+    alert("Selecione um curso!");
     return;
   }
  
   const total = esp + mes + dou;
  
   if (total === 0) {
-    alert('Digite pelo menos um valor.');
+    alert("Digite pelo menos um valor.");
     return;
   }
  
@@ -817,24 +852,8 @@ function calcular() {
   else if (nota == 4) cores[3] = "#3C7D22"; // verde oliva
   else if (nota == 5) cores[4] = "#00B0F0"; // azul
  
-  document.getElementById('resultado').innerHTML = `
-<h4>Resultados para o curso: ${curso}</h4>
-<p><strong>Total de docentes:</strong> ${total}</p>
-<p>Especialistas: ${esp} (${percEsp}%)</p>
-<p>Mestres: ${mes} (${percMes}%)</p>
-<p>Doutores: ${dou} (${percDou}%)</p>
-<hr>
-<p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
-<p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
- 
-    <div class="semaforo-container">
-<div class="luz ${nota==1?'acesa':''}" style="background:${cores[0]}; color:${cores[0]}"></div>
-<div class="luz ${nota==2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
-<div class="luz ${nota==3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
-<div class="luz ${nota==4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
-<div class="luz ${nota==5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
-</div>
-  `;
+  const legendaNota = classificacoes.legendas[nota] || "Sem legenda";
+  document.getElementById("resultado").innerHTML = `\n<h4>Resultados para o curso: ${curso}</h4>\n<p><strong>Total de docentes:</strong> ${total}</p>\n<p>Especialistas: ${esp} (${percEsp}%)</p>\n<p>Mestres: ${mes} (${percMes}%)</p>\n<p>Doutores: ${dou} (${percDou}%)</p>\n<hr>\n<p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>\n<p><strong>Nota Stricto Sensu:</strong> ${nota} (${legendaNota})</p>\n<div class="semaforo-container">\n<div class="luz ${nota==1?"acesa":""}" style="background:${cores[0]}; color:${cores[0]}"></div>\n<div class="luz ${nota==2?"acesa":""}" style="background:${cores[1]}; color:${cores[1]}"></div>\n<div class="luz ${nota==3?"acesa":""}" style="background:${cores[2]}; color:${cores[2]}"></div>\n<div class="luz ${nota==4?"acesa":""}" style="background:${cores[3]}; color:${cores[3]}"></div>\n<div class="luz ${nota==5?"acesa":""}" style="background:${cores[4]}; color:${cores[4]}"></div>\n</div>\n  `;
 }
 </script>
  
