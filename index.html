@@ -17,6 +17,12 @@
     text-align: center;
     color: #CE0058;
   }
+  **.logo {**
+**    display: block;**
+**    margin: 0 auto 20px auto;**
+**    max-width: 200px; /* Ajuste o tamanho conforme necessário */**
+**    height: auto;**
+**  }**
   label {
     font-weight: bold;
   }
@@ -47,94 +53,81 @@
     border-radius: 8px;
     text-align: center;
   }
-
-  /* Semáforo completo de 5 luzes */
-  .semaforo-container {
-    width: 80px;
-    margin: 25px auto;
-    background: #333;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.5);
-  }
-  .luz {
-    width: 40px;
-    height: 40px;
-    margin: 8px auto;
+  /* Estilo do semáforo */
+  .semaforo {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: #444;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
-    transition: all 0.4s ease;
-  }
-  .acesa {
-    box-shadow: 0 0 20px 5px currentColor, inset 0 0 8px rgba(255,255,255,0.5);
-    transform: scale(1.05);
+    margin: 15px auto;
+    border: 3px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
   }
 </style>
 </head>
 <body>
-
+    **<img src="afya_logo.png" alt="Logo da Afya" class="logo">**
+ 
 <h2>Calculadora de Censo - Desempenho Acadêmico</h2>
-
+ 
 <label for="curso">Selecione o curso:</label>
 <select id="curso">
-  <option value="">Selecione...</option>
-  <option>Administração</option>
-  <option>Administração Pública</option>
-  <option>Agronomia</option>
-  <option>Arquitetura e Urbanismo</option>
-  <option>Artes Visuais (Licenciatura)</option>
-  <option>Biomedicina</option>
-  <option>Ciência da Computação (Bacharelado)</option>
-  <option>Ciência da Computação (Licenciatura)</option>
-  <option>Ciências Biológicas (Bacharelado)</option>
-  <option>Ciências Biológicas (Licenciatura)</option>
-  <option>Ciências Contábeis</option>
-  <option>Ciências Econômicas</option>
-  <option>Ciências Sociais (Bacharelado)</option>
-  <option>Ciências Sociais (Licenciatura)</option>
-  <option>Comunicação Social (Jornalismo)</option>
-  <option>Comunicação Social (Publicidade e Propaganda)</option>
-  <option>Design (Bacharelado)</option>
-  <option>Direito</option>
-  <option>Educação Física (Bacharelado)</option>
-  <option>Educação Física (Licenciatura)</option>
-  <option>Enfermagem</option>
-  <option>Engenharia Ambiental</option>
-  <option>Engenharia Civil</option>
-  <option>Engenharia da Computação</option>
-  <option>Engenharia de Produção</option>
-  <option>Engenharia Elétrica</option>
-  <option>Engenharia Mecânica</option>
-  <option>Engenharia Mecatrônica</option>
-  <option>Engenharia Química</option>
-  <option>Estética e Cosmética</option>
-  <option>Farmácia</option>
-  <option>Fisioterapia</option>
-  <option>Medicina</option>
-  <option>Odontologia</option>
-  <option>Pedagogia (Licenciatura)</option>
-  <option>Psicologia</option>
-  <option>Sistemas de Informação</option>
+<option value="">Selecione...</option>
+<option>Administração</option>
+<option>Administração Pública</option>
+<option>Agronomia</option>
+<option>Arquitetura e Urbanismo</option>
+<option>Artes Visuais (Licenciatura)</option>
+<option>Biomedicina</option>
+<option>Ciência da Computação (Bacharelado)</option>
+<option>Ciência da Computação (Licenciatura)</option>
+<option>Ciências Biológicas (Bacharelado)</option>
+<option>Ciências Biológicas (Licenciatura)</option>
+<option>Ciências Contábeis</option>
+<option>Ciências Econômicas</option>
+<option>Ciências Sociais (Bacharelado)</option>
+<option>Ciências Sociais (Licenciatura)</option>
+<option>Comunicação Social (Jornalismo)</option>
+<option>Comunicação Social (Publicidade e Propaganda)</option>
+<option>Design (Bacharelado)</option>
+<option>Direito</option>
+<option>Educação Física (Bacharelado)</option>
+<option>Educação Física (Licenciatura)</option>
+<option>Enfermagem</option>
+<option>Engenharia Ambiental</option>
+<option>Engenharia Civil</option>
+<option>Engenharia da Computação</option>
+<option>Engenharia de Produção</option>
+<option>Engenharia Elétrica</option>
+<option>Engenharia Mecânica</option>
+<option>Engenharia Mecatrônica</option>
+<option>Engenharia Química</option>
+<option>Estética e Cosmética</option>
+<option>Farmácia</option>
+<option>Fisioterapia</option>
+<option>Medicina</option>
+<option>Odontologia</option>
+<option>Pedagogia (Licenciatura)</option>
+<option>Psicologia</option>
+<option>Sistemas de Informação</option>
 </select>
-
+ 
 <hr>
-
+ 
 <h3>Indicador - Stricto Sensu</h3>
-
+ 
 <label>Quantidade de Especialistas:</label>
 <input type="number" id="especialista" placeholder="Digite o número de Especialistas">
-
+ 
 <label>Quantidade de Mestres:</label>
 <input type="number" id="mestre" placeholder="Digite o número de Mestres">
-
+ 
 <label>Quantidade de Doutores:</label>
 <input type="number" id="doutor" placeholder="Digite o número de Doutores">
-
+ 
 <button onclick="calcular()">Calcular</button>
-
+ 
 <div id="resultado"></div>
-
+ 
 <script>
 const classificacoes = {
   "Administração": [
@@ -177,33 +170,33 @@ const classificacoes = {
     { limite: 0.48, nota: 0 }
   ]
 };
-
+ 
 function calcular() {
-  const esp = Number(document.getElementById('especialista').value);
-  const mes = Number(document.getElementById('mestre').value);
-  const dou = Number(document.getElementById('doutor').value);
-  const curso = document.getElementById('curso').value;
-
+  const esp = Number(document.getElementById("especialista").value);
+  const mes = Number(document.getElementById("mestre").value);
+  const dou = Number(document.getElementById("doutor").value);
+  const curso = document.getElementById("curso").value;
+ 
   if (!curso) {
-    alert('Selecione um curso!');
+    alert("Selecione um curso!");
     return;
   }
-
+ 
   const total = esp + mes + dou;
-
+ 
   if (total === 0) {
-    alert('Digite pelo menos um valor.');
+    alert("Digite pelo menos um valor.");
     return;
   }
-
+ 
   const percEsp = ((esp / total) * 100).toFixed(2);
   const percMes = ((mes / total) * 100).toFixed(2);
   const percDou = ((dou / total) * 100).toFixed(2);
   const somaMesDou = (Number(percMes) + Number(percDou)).toFixed(2);
-
+ 
   const classificacaoCurso = classificacoes[curso] || classificacoes["default"];
   const percDecimal = somaMesDou / 100;
-
+ 
   let nota = "Sem classificação";
   for (let i = 0; i < classificacaoCurso.length; i++) {
     if (percDecimal >= classificacaoCurso[i].limite) {
@@ -211,37 +204,28 @@ function calcular() {
       break;
     }
   }
-
-  // Cores padrão (apagadas)
-  let cores = ["#444", "#444", "#444", "#444", "#444"];
-
-  // Acende apenas a luz correspondente à nota
-  if (nota == 1) cores[0] = "#FF0000";      // vermelho
-  else if (nota == 2) cores[1] = "#FFC000"; // amarelo
-  else if (nota == 3) cores[2] = "#92D050"; // verde limão
-  else if (nota == 4) cores[3] = "#3C7D22"; // verde oliva
-  else if (nota == 5) cores[4] = "#00B0F0"; // azul
-
-  document.getElementById('resultado').innerHTML = `
-    <h4>Resultados para o curso: ${curso}</h4>
-    <p><strong>Total de docentes:</strong> ${total}</p>
-    <p>Especialistas: ${esp} (${percEsp}%)</p>
-    <p>Mestres: ${mes} (${percMes}%)</p>
-    <p>Doutores: ${dou} (${percDou}%)</p>
-    <hr>
-    <p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
-    <p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
-
-    <div class="semaforo-container">
-      <div class="luz ${nota==1?'acesa':''}" style="background:${cores[0]}; color:${cores[0]}"></div>
-      <div class="luz ${nota==2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
-      <div class="luz ${nota==3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
-      <div class="luz ${nota==4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
-      <div class="luz ${nota==5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
-    </div>
+ 
+  // Define a cor do semáforo conforme a nota
+  let corSemaforo = "gray";
+  if (nota == 5) corSemaforo = "#00B0F0";     // azul
+  else if (nota == 4) corSemaforo = "#3C7D22"; // verde oliva
+  else if (nota == 3) corSemaforo = "#92D050"; // verde limão
+  else if (nota == 2) corSemaforo = "#FFC000"; // amarelo
+  else if (nota == 1) corSemaforo = "#FF0000"; // vermelho
+ 
+  document.getElementById("resultado").innerHTML = `
+<h4>Resultados para o curso: ${curso}</h4>
+<p><strong>Total de docentes:</strong> ${total}</p>
+<p>Especialistas: ${esp} (${percEsp}%)</p>
+<p>Mestres: ${mes} (${percMes}%)</p>
+<p>Doutores: ${dou} (${percDou}%)</p>
+<hr>
+<p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
+<p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
+<div class="semaforo" style="background:${corSemaforo};"></div>
   `;
 }
 </script>
-
+ 
 </body>
 </html>
