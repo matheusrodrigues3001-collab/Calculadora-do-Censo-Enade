@@ -47,14 +47,28 @@
     border-radius: 8px;
     text-align: center;
   }
-  /* Estilo do semáforo */
-  .semaforo {
-    width: 60px;
-    height: 60px;
+
+  /* Semáforo completo de 5 luzes */
+  .semaforo-container {
+    width: 80px;
+    margin: 25px auto;
+    background: #333;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  }
+  .luz {
+    width: 40px;
+    height: 40px;
+    margin: 8px auto;
     border-radius: 50%;
-    margin: 15px auto;
-    border: 3px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background: #444;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    transition: all 0.4s ease;
+  }
+  .acesa {
+    box-shadow: 0 0 20px 5px currentColor, inset 0 0 8px rgba(255,255,255,0.5);
+    transform: scale(1.05);
   }
 </style>
 </head>
@@ -198,13 +212,15 @@ function calcular() {
     }
   }
 
-  // Define a cor do semáforo conforme a nota
-  let corSemaforo = "gray";
-  if (nota == 5) corSemaforo = "#00B0F0";     // azul
-  else if (nota == 4) corSemaforo = "#3C7D22"; // verde oliva
-  else if (nota == 3) corSemaforo = "#92D050"; // verde limão
-  else if (nota == 2) corSemaforo = "#FFC000"; // amarelo
-  else if (nota == 1) corSemaforo = "#FF0000"; // vermelho
+  // Cores padrão (apagadas)
+  let cores = ["#444", "#444", "#444", "#444", "#444"];
+
+  // Acende apenas a luz correspondente à nota
+  if (nota == 1) cores[0] = "#FF0000";      // vermelho
+  else if (nota == 2) cores[1] = "#FFC000"; // amarelo
+  else if (nota == 3) cores[2] = "#92D050"; // verde limão
+  else if (nota == 4) cores[3] = "#3C7D22"; // verde oliva
+  else if (nota == 5) cores[4] = "#00B0F0"; // azul
 
   document.getElementById('resultado').innerHTML = `
     <h4>Resultados para o curso: ${curso}</h4>
@@ -215,7 +231,14 @@ function calcular() {
     <hr>
     <p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
     <p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
-    <div class="semaforo" style="background:${corSemaforo};"></div>
+
+    <div class="semaforo-container">
+      <div class="luz ${nota==1?'acesa':''}" style="background:${cores[0]}; color:${cores[0]}"></div>
+      <div class="luz ${nota==2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
+      <div class="luz ${nota==3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
+      <div class="luz ${nota==4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
+      <div class="luz ${nota==5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
+    </div>
   `;
 }
 </script>
