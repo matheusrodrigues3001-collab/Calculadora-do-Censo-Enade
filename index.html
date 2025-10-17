@@ -799,13 +799,25 @@ function calcular() {
   const classificacaoCurso = classificacoes[curso] || classificacoes["default"];
   const percDecimal = somaMesDou / 100;
  
-  let nota = "Sem classificação";
-  for (let i = 0; i < classificacaoCurso.length; i++) {
-    if (percDecimal >= classificacaoCurso[i].limite) {
-      nota = classificacaoCurso[i].nota;
-      break;
-    }
+  let nota = 0;
+for (let i = 0; i < classificacaoCurso.length - 1; i++) {
+  const atual = classificacaoCurso[i];
+  const proximo = classificacaoCurso[i + 1];
+  
+  // Se estiver dentro do intervalo entre duas notas
+  if (percDecimal >= proximo.limite && percDecimal <= atual.limite) {
+    const proporcao = (percDecimal - proximo.limite) / (atual.limite - proximo.limite);
+    nota = proximo.nota + proporcao * (atual.nota - proximo.nota);
+    nota = Number(nota.toFixed(2)); // arredonda para 2 casas
+    break;
   }
+  
+  // Se for maior que o limite máximo
+  if (percDecimal >= atual.limite) {
+    nota = atual.nota;
+    break;
+  }
+}
  
   // Cores padrão (apagadas)
   let cores = ["#444", "#444", "#444", "#444", "#444"];
