@@ -74,13 +74,10 @@
 </head>
 <body>
  
-	<a href="https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Calculadora-Senso-ENADE/" style="text-decoration: none;">
-	    <button style="width: auto; padding: 8px 15px; margin-bottom: 15px; background: #555; border-radius: 6px;">Voltar</button>
-	</a>
-	<a href="https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Calculadora-Senso-ENADE/" style="text-decoration: none;">
-	    <button style="width: auto; padding: 8px 15px; margin-bottom: 15px; background: #555; border-radius: 6px;">Voltar</button>
-	</a>
-	<h2>Calculadora de Censo - Desempenho Acadêmico</h2>
+		<a href="https://matheusrodrigues3001-collab.github.io/Pagina-Inicial---Calculadora-Senso-ENADE/" style="text-decoration: none;">
+		    <button style="width: auto; padding: 8px 15px; margin-bottom: 15px; background: #555; border-radius: 6px;">Voltar</button>
+		</a>
+		<h2>Calculadora de Censo - Desempenho Acadêmico</h2>
  
 <label for="curso">Selecione o curso:</label>
 <select id="curso">
@@ -839,25 +836,18 @@ for (let i = 0; i < classificacaoCurso.length - 1; i++) {
 	else if (notaArredondada === 4) cores[3] = "#3C7D22"; // verde oliva
 	else if (notaArredondada === 5) cores[4] = "#00B0F0";              // azul
 	 
-	  document.getElementById('resultado').innerHTML = `
-	<h4>Resultados para o curso: ${curso}</h4>
-	<p><strong>Total de docentes:</strong> ${total}</p>
-	<p>Especialistas: ${esp} (${percEsp}%)</p>
-	<p>Mestres: ${mes} (${percMes}%)</p>
-	<p>Doutores: ${dou} (${percDou}%)</p>
-	<hr>
-	<p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
-	<p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
-	 
-	    <div class="semaforo-container">
-	<div class="luz ${notaArredondada===1?'acesa':''}" style="background:${cores[0]}; color:${cores[0]}"></div>
-	<div class="luz ${notaArredondada===2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
-	<div class="luz ${notaArredondada===3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
-	<div class="luz ${notaArredondada===4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
-	<div class="luz ${notaArredondada===5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
-	</div>
-	  `;
-	}
+		  document.getElementById('resultado').innerHTML = `
+		<h4>Resultados para o curso: ${curso}</h4>
+		<p><strong>Total de docentes:</strong> ${total}</p>
+		<p>Especialistas: ${esp} (${percEsp}%)</p>
+		<p>Mestres: ${mes} (${percMes}%)</p>
+		<p>Doutores: ${dou} (${percDou}%)</p>
+		<hr>
+		<p><strong>Soma de Mestres + Doutores:</strong> ${somaMesDou}%</p>
+		<p><strong>Nota Stricto Sensu:</strong> ${nota}</p>
+		  `;
+		  document.getElementById('resultado').insertAdjacentHTML('beforeend', criarSemaforo(notaArredondada));
+		}
 
 	function limparDados() {
 	    document.getElementById('curso').value = '';
@@ -866,17 +856,39 @@ for (let i = 0; i < classificacaoCurso.length - 1; i++) {
 	    document.getElementById('doutor').value = '';
 	    document.getElementById('resultado').innerHTML = '';
 	    // Recria o semáforo vazio
-	    document.getElementById('resultado').innerHTML = `
-	        <div class="semaforo-container">
-	            <div class="luz" style="background:#444; color:#444"></div>
-	            <div class="luz" style="background:#444; color:#444"></div>
-	            <div class="luz" style="background:#444; color:#444"></div>
-	            <div class="luz" style="background:#444; color:#444"></div>
-	            <div class="luz" style="background:#444; color:#444"></div>
-	        </div>
-	    `;
-	}
-	</script>
-	 
-	</body>
-	</html>
+		    document.getElementById('resultado').innerHTML = '';
+		    // Recria o semáforo vazio
+		    document.getElementById('resultado').insertAdjacentHTML('beforeend', criarSemaforo(-1));
+		}
+
+		function criarSemaforo(notaArredondada) {
+		    // Cores padrão (apagadas)
+		    let cores = ["#444", "#444", "#444", "#444", "#444"];
+		    
+		    // Acende a luz correspondente à faixa da nota (mesmo fracionada)
+		    if (notaArredondada === 1) cores[0] = "#FF0000";      // vermelho
+		    else if (notaArredondada === 2) cores[1] = "#FFC000"; // amarelo
+		    else if (notaArredondada === 3) cores[2] = "#92D050"; // verde limão
+		    else if (notaArredondada === 4) cores[3] = "#3C7D22"; // verde oliva
+		    else if (notaArredondada === 5) cores[4] = "#00B0F0";              // azul
+		     
+		    let semaforoHtml = `
+		        <div class="semaforo-container">
+		            <div class="luz ${notaArredondada===1?'acesa':''}" style="background:${cores[0]}; color:${cores[0]}"></div>
+		            <div class="luz ${notaArredondada===2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
+		            <div class="luz ${notaArredondada===3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
+		            <div class="luz ${notaArredondada===4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
+		            <div class="luz ${notaArredondada===5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
+		        </div>
+		    `;
+		    return semaforoHtml;
+		}
+
+		// Inicializa o semáforo vazio ao carregar a página
+		document.addEventListener('DOMContentLoaded', () => {
+		    document.getElementById('resultado').insertAdjacentHTML('beforeend', criarSemaforo(-1));
+		});
+		</script>
+		 
+		</body>
+		</html>
