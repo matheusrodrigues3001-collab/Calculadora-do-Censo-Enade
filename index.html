@@ -17,6 +17,7 @@
     text-align: center;
     color: #CE0058;
   }
+
   label {
     font-weight: bold;
   }
@@ -27,6 +28,7 @@
     border-radius: 6px;
     border: 1px solid #ccc;
   }
+
   button {
     width: 100%;
     padding: 10px;
@@ -36,6 +38,7 @@
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
   }
   button:hover {
     background: #9a0043;
@@ -74,6 +77,9 @@
 </head>
 <body>
  
+<a href="https://matheusafya.github.io/Pagina-Inicial---Calculadora-Senso-ENADE/" style="text-decoration: none;">
+    <button style="width: auto; padding: 8px 15px; margin-bottom: 15px; background: #555; border-radius: 6px;">Voltar</button>
+</a>
 <h2>Calculadora de Censo - Desempenho Acadêmico</h2>
  
 <label for="curso">Selecione o curso:</label>
@@ -132,6 +138,7 @@
 <input type="number" id="doutor" placeholder="Digite o número de Doutores">
  
 <button onclick="calcular()">Calcular</button>
+<button onclick="limparDados()" style="background: #555; margin-top: 5px;">Limpar Dados</button>
  
 <div id="resultado"></div>
  
@@ -354,58 +361,35 @@ const classificacoes = {
   ],
   "Engenharia Mecatrônica": [
     { limite: 1, nota: 5 },
-    { limite: 0.95, nota: 4 },
-    { limite: 0.9, nota: 3 },
-    { limite: 0.85, nota: 2 },
-    { limite: 0.75, nota: 1 }
+    { limite: 0.9, nota: 4 },
+    { limite: 0.8, nota: 3 },
+    { limite: 0.7, nota: 2 },
+    { limite: 0.6, nota: 1 },
+    { limite: 0.59, nota: 0 }
   ],
   "Engenharia Química": [
     { limite: 1, nota: 5 },
-    { limite: 0.95, nota: 4 },
-    { limite: 0.91, nota: 3 },
-    { limite: 0.85, nota: 2 },
-    { limite: 0.82, nota: 1 },
-    { limite: 0.81, nota: 0 }
+    { limite: 0.92, nota: 4 },
+    { limite: 0.84, nota: 3 },
+    { limite: 0.76, nota: 2 },
+    { limite: 0.68, nota: 1 },
+    { limite: 0.67, nota: 0 }
   ],
   "Estética e Cosmética": [
-    { limite: 1, nota: 5 },
-    { limite: 0.88, nota: 4 },
-    { limite: 0.73, nota: 3 },
-    { limite: 0.62, nota: 2 },
-    { limite: 0.49, nota: 1 },
-    { limite: 0.48, nota: 0 }
+    { limite: 0.9375, nota: 5 },
+    { limite: 0.875, nota: 4 },
+    { limite: 0.75, nota: 3 },
+    { limite: 0.625, nota: 2 },
+    { limite: 0.5, nota: 1 },
+    { limite: 0.25, nota: 0 }
   ],
   "Farmácia": [
     { limite: 1, nota: 5 },
     { limite: 0.9, nota: 4 },
-    { limite: 0.85, nota: 3 },
-    { limite: 0.73, nota: 2 },
-    { limite: 0.68, nota: 1 },
-    { limite: 0.67, nota: 0 }
-  ],
-  "Filosofia (Bacharelado)": [
-    { limite: 0.965, nota: 5 },
-    { limite: 0.928, nota: 4 },
-    { limite: 0.866, nota: 3 },
-    { limite: 0.8, nota: 2 },
-    { limite: 0.75, nota: 1 },
-    { limite: 0.294, nota: 0 }
-  ],
-  "Filosofia (Licenciatura)": [
-    { limite: 0.916, nota: 5 },
-    { limite: 0.833, nota: 4 },
-    { limite: 0.769, nota: 3 },
-    { limite: 0.666, nota: 2 },
-    { limite: 0.65, nota: 1 },
-    { limite: 0.333, nota: 0 }
-  ],
-  "Física (Licenciatura)": [
-    { limite: 0.956, nota: 5 },
-    { limite: 0.912, nota: 4 },
-    { limite: 0.833, nota: 3 },
-    { limite: 0.75, nota: 2 },
-    { limite: 0.666, nota: 1 },
-    { limite: 0.111, nota: 0 }
+    { limite: 0.8, nota: 3 },
+    { limite: 0.7, nota: 2 },
+    { limite: 0.6, nota: 1 },
+    { limite: 0.59, nota: 0 }
   ],
   "Fisioterapia": [
     { limite: 1, nota: 5 },
@@ -415,92 +399,61 @@ const classificacoes = {
     { limite: 0.6, nota: 1 },
     { limite: 0.59, nota: 0 }
   ],
-  "Fonoaudiologia": [
-    { limite: 1, nota: 5 },
-    { limite: 0.91, nota: 4 },
-    { limite: 0.84, nota: 3 },
-    { limite: 0.79, nota: 2 },
-    { limite: 0.7, nota: 1 },
-    { limite: 0.69, nota: 0 }
-  ],
   "Geografia (Bacharelado)": [
-    { limite: 0.961, nota: 5 },
-    { limite: 0.937, nota: 4 },
-    { limite: 0.857, nota: 3 },
-    { limite: 0.8, nota: 2 },
-    { limite: 0.7, nota: 1 },
-    { limite: 0.608, nota: 0 }
-  ],
-  "Geografia (Licenciatura)": [
-    { limite: 0.96, nota: 5 },
-    { limite: 0.923, nota: 4 },
-    { limite: 0.846, nota: 3 },
-    { limite: 0.76, nota: 2 },
-    { limite: 0.7, nota: 1 },
-    { limite: 0.428, nota: 0 }
-  ],
-  "Gestão Ambiental": [
-    { limite: 1, nota: 5 },
+    { limite: 0.975, nota: 5 },
     { limite: 0.95, nota: 4 },
     { limite: 0.9, nota: 3 },
-    { limite: 0.8, nota: 2 },
-    { limite: 0.7, nota: 1 }
+    { limite: 0.85, nota: 2 },
+    { limite: 0.8, nota: 1 },
+    { limite: 0.4, nota: 0 }
   ],
-  "Gestão Comercial": [
-    { limite: 0.9285714, nota: 5 },
-    { limite: 0.85, nota: 4 },
-    { limite: 0.7, nota: 3 },
-    { limite: 0.5555556, nota: 2 },
-    { limite: 0.4444444, nota: 1 },
-    { limite: 0.25, nota: 0 }
+  "Geografia (Licenciatura)": [
+    { limite: 0.975, nota: 5 },
+    { limite: 0.95, nota: 4 },
+    { limite: 0.9, nota: 3 },
+    { limite: 0.85, nota: 2 },
+    { limite: 0.8, nota: 1 },
+    { limite: 0.4, nota: 0 }
   ],
   "História (Bacharelado)": [
-    { limite: 1, nota: 5 },
-    { limite: 0.978, nota: 4 },
-    { limite: 0.962, nota: 3 },
-    { limite: 0.96, nota: 2 },
-    { limite: 0.96, nota: 1 },
-    { limite: 0.318, nota: 0 }
+    { limite: 0.975, nota: 5 },
+    { limite: 0.95, nota: 4 },
+    { limite: 0.9, nota: 3 },
+    { limite: 0.85, nota: 2 },
+    { limite: 0.8, nota: 1 },
+    { limite: 0.4, nota: 0 }
   ],
   "História (Licenciatura)": [
-    { limite: 0.96, nota: 5 },
-    { limite: 0.914, nota: 4 },
-    { limite: 0.833, nota: 3 },
-    { limite: 0.75, nota: 2 },
-    { limite: 0.666, nota: 1 },
-    { limite: 0.222, nota: 0 }
+    { limite: 0.975, nota: 5 },
+    { limite: 0.95, nota: 4 },
+    { limite: 0.9, nota: 3 },
+    { limite: 0.85, nota: 2 },
+    { limite: 0.8, nota: 1 },
+    { limite: 0.4, nota: 0 }
   ],
-  "Letras - Inglês (Licenciatura)": [
-    { limite: 0.954, nota: 5 },
-    { limite: 0.909, nota: 4 },
-    { limite: 0.818, nota: 3 },
-    { limite: 0.75, nota: 2 },
-    { limite: 0.636, nota: 1 },
-    { limite: 0.333, nota: 0 }
+  "Letras - Português (Licenciatura)": [
+    { limite: 0.95, nota: 5 },
+    { limite: 0.9, nota: 4 },
+    { limite: 0.8, nota: 3 },
+    { limite: 0.7, nota: 2 },
+    { limite: 0.6, nota: 1 },
+    { limite: 0.3, nota: 0 }
   ],
-  "Letras-Português (Licenciatura)": [
-    { limite: 0.953, nota: 5 },
-    { limite: 0.906, nota: 4 },
-    { limite: 0.814, nota: 3 },
-    { limite: 0.727, nota: 2 },
-    { limite: 0.625, nota: 1 },
-    { limite: 0.2, nota: 0 }
+  "Letras - Português e Inglês (Licenciatura)": [
+    { limite: 0.95, nota: 5 },
+    { limite: 0.9, nota: 4 },
+    { limite: 0.8, nota: 3 },
+    { limite: 0.7, nota: 2 },
+    { limite: 0.6, nota: 1 },
+    { limite: 0.3, nota: 0 }
   ],
-  "Letras-Português e Espanhol (Licenciatura)": [
-    { limite: 0.958, nota: 5 },
-    { limite: 0.892, nota: 4 },
-    { limite: 0.785, nota: 3 },
-    { limite: 0.777, nota: 2 },
-    { limite: 0.571, nota: 1 },
-    { limite: 0.25, nota: 0 }
-  ],
-  "Letras-Português e Inglês (Licenciatura)": [
-    { limite: 0.928, nota: 5 },
-    { limite: 0.857, nota: 4 },
-    { limite: 0.727, nota: 3 },
-    { limite: 0.571, nota: 2 },
-    { limite: 0.444, nota: 1 },
-    { limite: 0.272, nota: 0 }
+  "Matemática (Bacharelado)": [
+    { limite: 0.95, nota: 5 },
+    { limite: 0.9, nota: 4 },
+    { limite: 0.8, nota: 3 },
+    { limite: 0.7, nota: 2 },
+    { limite: 0.6, nota: 1 },
+    { limite: 0.3, nota: 0 }
   ],
   "Matemática (Licenciatura)": [
     { limite: 0.935, nota: 5 },
@@ -848,6 +801,18 @@ else if (nota >= 5) cores[4] = "#00B0F0";              // azul
 </div>
   `;
 }
+
+// Nova função para limpar os dados
+function limparDados() {
+    document.getElementById('curso').value = "";
+    document.getElementById('especialista').value = "";
+    document.getElementById('mestre').value = "";
+    document.getElementById('doutor').value = "";
+    document.getElementById('resultado').innerHTML = "";
+    alert('Dados limpos com sucesso!');
+}
+
+
 </script>
  
 </body>
