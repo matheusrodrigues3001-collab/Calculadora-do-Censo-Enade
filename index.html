@@ -775,14 +775,14 @@ for (let i = 0; i < classificacaoCurso.length - 1; i++) {
   // Cores padrão (apagadas)
   let cores = ["#444", "#444", "#444", "#444", "#444"];
  
-  // Acende a luz correspondente à faixa da nota (mesmo fracionada)
-if (nota >= 1 && nota < 2) cores[0] = "#FF0000";      // vermelho
-else if (nota >= 2 && nota < 3) cores[1] = "#FFC000"; // amarelo
-else if (nota >= 3 && nota < 4) cores[2] = "#92D050"; // verde limão
-else if (nota >= 4 && nota < 5) cores[3] = "#3C7D22"; // verde oliva
-else if (nota >= 5) cores[4] = "#00B0F0";              // azul
- 
-  document.getElementById('resultado').innerHTML = `
+	  // Acende a luz correspondente à faixa da nota (mesmo fracionada)
+	if (nota >= 1 && nota < 2) cores[0] = "#FF0000";      // vermelho
+	else if (nota >= 2 && nota < 3) cores[1] = "#FFC000"; // amarelo
+	else if (nota >= 3 && nota < 4) cores[2] = "#92D050"; // verde limão
+	else if (nota >= 4 && nota < 5) cores[3] = "#3C7D22"; // verde oliva
+	else if (nota >= 5) cores[4] = "#00B0F0";              // azul
+	 
+	  document.getElementById('resultado').innerHTML = `
 <h4>Resultados para o curso: ${curso}</h4>
 <p><strong>Total de docentes:</strong> ${total}</p>
 <p>Especialistas: ${esp} (${percEsp}%)</p>
@@ -797,23 +797,41 @@ else if (nota >= 5) cores[4] = "#00B0F0";              // azul
 <div class="luz ${nota==2?'acesa':''}" style="background:${cores[1]}; color:${cores[1]}"></div>
 <div class="luz ${nota==3?'acesa':''}" style="background:${cores[2]}; color:${cores[2]}"></div>
 <div class="luz ${nota==4?'acesa':''}" style="background:${cores[3]}; color:${cores[3]}"></div>
-<div class="luz ${nota==5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
-</div>
-  `;
-}
-
-// Nova função para limpar os dados
-function limparDados() {
-    document.getElementById('curso').value = "";
-    document.getElementById('especialista').value = "";
-    document.getElementById('mestre').value = "";
-    document.getElementById('doutor').value = "";
-    document.getElementById('resultado').innerHTML = "";
-    alert('Dados limpos com sucesso!');
-}
-
-
-</script>
+	<div class="luz ${nota==5?'acesa':''}" style="background:${cores[4]}; color:${cores[4]}"></div>
+	</div>
+	  
+	  ${criarLegendaSemaforo()}
+	  `;
+	}
+	
+	// Função para criar o HTML da legenda do semáforo
+	function criarLegendaSemaforo() {
+		return `
+			<div style="margin-top: 20px; padding: 15px; background: #e6f1ff; border-radius: 8px;">
+				<h3 style="text-align: center; color: #CE0058;">Legenda do Semáforo</h3>
+				<ul style="list-style: none; padding: 0; text-align: left;">
+					<li style="margin-bottom: 5px;"><span style="display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #FF0000; margin-right: 10px;"></span>Vermelho - Crítico</li>
+					<li style="margin-bottom: 5px;"><span style="display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #FFC000; margin-right: 10px;"></span>Amarelo - Insatisfatório</li>
+					<li style="margin-bottom: 5px;"><span style="display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #92D050; margin-right: 10px;"></span>Verde Limão - Satisfatório</li>
+					<li style="margin-bottom: 5px;"><span style="display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #3C7D22; margin-right: 10px;"></span>Verde Oliva - Acima do Satisfatório</li>
+					<li style="margin-bottom: 5px;"><span style="display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #00B0F0; margin-right: 10px;"></span>Azul - Nota máxima</li>
+				</ul>
+			</div>
+		`;
+	}
+	
+	// Nova função para limpar os dados
+	function limparDados() {
+	    document.getElementById('curso').value = "";
+	    document.getElementById('especialista').value = "";
+	    document.getElementById('mestre').value = "";
+	    document.getElementById('doutor').value = "";
+	    document.getElementById('resultado').innerHTML = "";
+	    alert('Dados limpos com sucesso!');
+	}
+	
+	
+	</script>
  
 </body>
 </html>
